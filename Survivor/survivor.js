@@ -2,11 +2,11 @@
 main();
 function main(){
     //variables
-    let posX = sizeWidth/2;
-    let posY = sizeHeight/2;
+    let mangoX = sizeWidth/2;
+    let mangoY = sizeHeight/2;
 
     function draw(){
-        drawMango(posX,posY);
+        drawMango(mangoX,mangoY);
         
         requestAnimationFrame(draw);
     }
