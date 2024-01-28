@@ -23,7 +23,8 @@ function enemyType(num=1){
             this.headSize = BASE_HEAD_SIZE;
             this.color = "gray"
             this.moveSpeed = MOVE_SPEED;
-            this.xPos;
+            this.xPos = 100;
+            this.yPos = 100;
             break;
         case 2:
             this.bodyWidth = BASE_BODY_WIDTH * TYPE_MULTIPLIER ;
@@ -35,41 +36,43 @@ function enemyType(num=1){
             this.headSize = BASE_HEAD_SIZE * TYPE_MULTIPLIER;
             this.color = "red";
             this.moveSpeed = MOVE_SPEED * TYPE_MULTIPLIER;
+            this.xPos = 160;
+            this.yPos = 100;
             break;
     }
 }
 // enemy.type sets everything else
-function drawEnemy(x,y,enemy){
-    drawEnemyBody(x,y,enemy);
-    drawEnemyLegs(x,y,enemy);
-    drawEnemyArms(x,y,enemy);
-    drawEnemyHead(x,y,enemy);
+function drawEnemy(enemy){
+    drawEnemyBody(enemy);
+    drawEnemyLegs(enemy);
+    drawEnemyArms(enemy);
+    drawEnemyHead(enemy);
 }
 
-function drawEnemyBody(x,y,enemy){
+function drawEnemyBody(enemy){
 
     ctx.beginPath();
-    ctx.rect(x-(enemy.bodyWidth)/2,y-(enemy.bodyHeight)/2,enemy.bodyWidth,enemy.bodyHeight)
+    ctx.rect(enemy.xPos-(enemy.bodyWidth)/2,enemy.yPos-(enemy.bodyHeight)/2,enemy.bodyWidth,enemy.bodyHeight)
     ctx.fillStyle = enemy.color;
     ctx.fill();
     ctx.closePath();
 }
 
-function drawEnemyLegs(x,y,enemy){
+function drawEnemyLegs(enemy){
     
     ctx.beginPath();
     //right leg
-    ctx.rect(x+enemy.bodyWidth/5.9,y+enemy.bodyHeight/2,enemy.legWidth,enemy.legHeight);
-    ctx.arc(x+enemy.bodyWidth/2.6,y+enemy.bodyHeight/2,enemy.bodyWidth/3,0,Math.PI*2,false);
+    ctx.rect(enemy.xPos+enemy.bodyWidth/5.9,enemy.yPos+enemy.bodyHeight/2,enemy.legWidth,enemy.legHeight);
+    ctx.arc(enemy.xPos+enemy.bodyWidth/2.6,enemy.yPos+enemy.bodyHeight/2,enemy.bodyWidth/3,0,Math.PI*2,false);
     //left leg
-    ctx.rect(x-enemy.bodyWidth/1.5,y+enemy.bodyHeight/2,enemy.legWidth,enemy.legHeight);
-    ctx.arc(x-enemy.bodyWidth/2.5,y+enemy.bodyHeight/2,enemy.bodyWidth/3,0,Math.PI*2,false);
+    ctx.rect(enemy.xPos-enemy.bodyWidth/1.5,enemy.yPos+enemy.bodyHeight/2,enemy.legWidth,enemy.legHeight);
+    ctx.arc(enemy.xPos-enemy.bodyWidth/2.5,enemy.yPos+enemy.bodyHeight/2,enemy.bodyWidth/3,0,Math.PI*2,false);
     ctx.fillStyle = enemy.color;
     ctx.fill();
     ctx.closePath();
 }
 
-function drawEnemyArms(x,y,enemy){
+function drawEnemyArms(enemy){
     //right arm
     ctx.beginPath();
     ctx.ellipse(x+enemy.bodyWidth,y-enemy.bodyHeight/1.8,enemy.armWidth,enemy.armLength,4,0,Math.PI * 2,false);
@@ -97,11 +100,17 @@ function drawEnemyHead(x,y,enemy){
  **************/
 //basically want x and y of enemy to approach mangoX and mangoY
 function moveEnemy(enemy,char){
-    while(enemy.x<mangoX){
-        x += x;
+    while(enemy.xPos<char.xPos){
+        enemy.xPos += enemy.moveSpeed;
     }
-    while(x>mangoX){
-        x -= x;
+    while(enemy.xPos>char.xPos){
+        enemy.xPos -= enemy.moveSpeed;
+    }
+    while(enemy.yPos<char.yPos){
+        enemy.yPos += enemy.moveSpeed;
+    }
+    while(enemy.yPos>char.yPos){
+        enemy.yPos += enemy.moveSpeed;
     }
     
 }
