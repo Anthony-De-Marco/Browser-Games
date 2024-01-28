@@ -20,8 +20,8 @@ function main(){
         moveMain(mango,move);
         hitBorderMain(mango,move);
 
-        drawEnemy(100,100,ghoul);
-        drawEnemy(160,100,orc);
+        drawEnemy(ghoul);
+        drawEnemy(orc);
         
         requestAnimationFrame(draw);
     }

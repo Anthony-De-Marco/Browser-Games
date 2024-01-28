@@ -75,21 +75,21 @@ function drawEnemyLegs(enemy){
 function drawEnemyArms(enemy){
     //right arm
     ctx.beginPath();
-    ctx.ellipse(x+enemy.bodyWidth,y-enemy.bodyHeight/1.8,enemy.armWidth,enemy.armLength,4,0,Math.PI * 2,false);
+    ctx.ellipse(enemy.xPos+enemy.bodyWidth,enemy.yPos-enemy.bodyHeight/1.8,enemy.armWidth,enemy.armLength,4,0,Math.PI * 2,false);
     ctx.fillStyle = enemy.color;
     ctx.fill();
     ctx.closePath();
     //left arm
     ctx.beginPath();
-    ctx.ellipse(x-enemy.bodyWidth,y-enemy.bodyHeight/1.8,enemy.armWidth,enemy.armLength,2.2,0,Math.PI * 2,false);
+    ctx.ellipse(enemy.xPos-enemy.bodyWidth,enemy.yPos-enemy.bodyHeight/1.8,enemy.armWidth,enemy.armLength,2.2,0,Math.PI * 2,false);
     ctx.fillStyle = enemy.color;
     ctx.fill();
     ctx.closePath();
 }
 
-function drawEnemyHead(x,y,enemy){
+function drawEnemyHead(enemy){
     ctx.beginPath();
-    ctx.arc(x, y-enemy.bodyHeight/1.4,enemy.headSize,0, Math.PI * 2, false)
+    ctx.arc(enemy.xPos, enemy.yPos-enemy.bodyHeight/1.4,enemy.headSize,0, Math.PI * 2, false)
     ctx.fillStyle = enemy.color;
     ctx.fill();
     ctx.closePath();

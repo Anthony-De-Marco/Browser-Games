@@ -92,7 +92,7 @@
         
         function drawMainShield(char){
             ctx.beginPath();
-            ctx.ellipse(char.xPos,char.yPos-char.bodyHeight/3.125,char.shieldSize,char.shieldHeight,0,0,Math.PI * 2);
+            ctx.ellipse(char.xPos,char.yPos-char.bodyHeight/3.125,char.shieldWidth,char.shieldHeight,0,0,Math.PI * 2);
             ctx.strokeStyle = "rgb(137, 211, 251)";
             ctx.stroke();
             ctx.closePath();
