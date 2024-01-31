@@ -13,6 +13,7 @@
             this.strokeColor = "black";
             this.linewidth = 2;
 
+            this.shieldHealth=document.getElementById("health");
             this.moveSpeed = 3;
             this.xPos = canvas.width/2;
             this.yPos = canvas.height/2;
@@ -126,6 +127,10 @@
             if(char.yPos+char.shieldHeight >= canvas.height){
                 move.canMoveDown = false;
             }
+        }
+
+        function takeDamageMain(enemy,char){
+            char.shieldHealth.value -= enemy.damage;
         }
         
         // ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle)

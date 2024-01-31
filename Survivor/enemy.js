@@ -7,6 +7,7 @@ function enemyType(num=1){
     const BASE_ARM_LENGTH = 6;
     const BASE_HEAD_SIZE = 5;
 
+    const BASE_DAMAGE = 5;
     const MOVE_SPEED = 1;
 
     const TYPE_MULTIPLIER = 1.3;
@@ -22,6 +23,7 @@ function enemyType(num=1){
             this.armLength = BASE_ARM_LENGTH;
             this.headSize = BASE_HEAD_SIZE;
             this.color = "gray"
+            this.damage = BASE_DAMAGE;
             this.moveSpeed = MOVE_SPEED;
             this.xPos = 100;
             this.yPos = 100;
@@ -35,6 +37,7 @@ function enemyType(num=1){
             this.armLength = BASE_ARM_LENGTH * TYPE_MULTIPLIER;
             this.headSize = BASE_HEAD_SIZE * TYPE_MULTIPLIER;
             this.color = "red";
+            this.damage = BASE_DAMAGE * TYPE_MULTIPLIER;
             this.moveSpeed = MOVE_SPEED * TYPE_MULTIPLIER;
             this.xPos = 160;
             this.yPos = 100;
@@ -100,17 +103,17 @@ function drawEnemyHead(enemy){
  **************/
 //basically want x and y of enemy to approach mangoX and mangoY
 function moveEnemy(enemy,char){
-    while(enemy.xPos<char.xPos){
+    if(enemy.xPos<char.xPos){
         enemy.xPos += enemy.moveSpeed;
     }
-    while(enemy.xPos>char.xPos){
+    if(enemy.xPos>char.xPos){
         enemy.xPos -= enemy.moveSpeed;
     }
-    while(enemy.yPos<char.yPos){
+    if(enemy.yPos<char.yPos){
         enemy.yPos += enemy.moveSpeed;
     }
-    while(enemy.yPos>char.yPos){
-        enemy.yPos += enemy.moveSpeed;
+    if(enemy.yPos>char.yPos){
+        enemy.yPos -= enemy.moveSpeed;
     }
     
 }

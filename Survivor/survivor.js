@@ -22,6 +22,7 @@ function main(){
 
         drawEnemy(ghoul);
         drawEnemy(orc);
+        moveEnemy(ghoul,mango);
         
         requestAnimationFrame(draw);
     }
