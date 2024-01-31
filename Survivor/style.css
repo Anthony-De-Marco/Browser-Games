@@ -6,6 +6,7 @@
   body{
     background-color: #092301;
     margin:auto;
+    display:block;
   }
   
   canvas {
