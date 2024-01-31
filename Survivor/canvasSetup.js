@@ -8,7 +8,7 @@ function canvasSetupMain(canvas,ctx){
     
     // Set display size (vw/vh).
     var sizeWidth = PERCENT_WIDTH * window.innerWidth / 100,
-    sizeHeight = PERCENT_HEIGHT * window.innerHeight / 102.656;
+    sizeHeight = PERCENT_HEIGHT * window.innerHeight / 105;
     
     //Setting the canvas site and width to be responsive 
     canvas.width = sizeWidth;

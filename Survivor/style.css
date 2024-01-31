@@ -5,14 +5,17 @@
 
   body{
     background-color: #092301;
+    margin:auto;
   }
   
   canvas {
-    background: #092301;
+    background: #0f3902;
     display: block;
     margin:auto;
   }
 
   progress{
     width:100vw;
+    position:absolute;
+    margin:auto;
   }

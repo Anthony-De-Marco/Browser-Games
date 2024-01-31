@@ -12,11 +12,13 @@ function main(){
     let orc = new enemyType(2);
     let mango = new mainChar();
     let move = new movement();
+    let sOrb = new weaponType(1);
 
     function draw(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         drawMain(mango);
+        drawWeapon(sOrb,mango);
         moveMain(mango,move);
         hitBorderMain(mango,move);
 
