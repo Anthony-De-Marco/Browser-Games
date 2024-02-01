@@ -7,10 +7,11 @@ function enemyType(num=1){
     const BASE_ARM_LENGTH = 6;
     const BASE_HEAD_SIZE = 5;
 
-    const BASE_DAMAGE = 5;
+    const BASE_ENEMY_DAMAGE = 5;
     const MOVE_SPEED = 1;
-
+    const BASE_ENEMY_HP = 1;
     const TYPE_MULTIPLIER = 1.3;
+    
 
 
     switch(num){
@@ -23,8 +24,10 @@ function enemyType(num=1){
             this.armLength = BASE_ARM_LENGTH;
             this.headSize = BASE_HEAD_SIZE;
             this.color = "gray"
-            this.damage = BASE_DAMAGE;
+            this.damage = BASE_ENEMY_DAMAGE;
             this.moveSpeed = MOVE_SPEED;
+            this.status = 1;
+            this.enemyHP = BASE_ENEMY_HP;
             this.xPos = 100;
             this.yPos = 100;
             break;
@@ -37,8 +40,10 @@ function enemyType(num=1){
             this.armLength = BASE_ARM_LENGTH * TYPE_MULTIPLIER;
             this.headSize = BASE_HEAD_SIZE * TYPE_MULTIPLIER;
             this.color = "red";
-            this.damage = BASE_DAMAGE * TYPE_MULTIPLIER;
+            this.damage = BASE_ENEMY_DAMAGE * TYPE_MULTIPLIER;
             this.moveSpeed = MOVE_SPEED * TYPE_MULTIPLIER;
+            this.status= 1;
+            this.enemyHP = BASE_ENEMY_HP * TYPE_MULTIPLIER;
             this.xPos = 160;
             this.yPos = 100;
             break;

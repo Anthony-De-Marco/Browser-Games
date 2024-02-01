@@ -19,6 +19,7 @@ function main(){
 
         drawMain(mango);
         drawWeapon(sOrb,mango);
+        moveWeapon(sOrb,mango);
         moveMain(mango,move);
         hitBorderMain(mango,move);
 

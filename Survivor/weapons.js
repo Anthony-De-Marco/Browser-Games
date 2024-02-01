@@ -1,33 +1,48 @@
-function weaponType(type){
-    const DAMAGE = 1;
+const MAX_WEAPON_DIST = 50;
 
+const WeaponMovement = Object.freeze({
+    Orbit: Symbol('orbit')
+})
+
+
+function weaponType(type){
+    const BASE_WEAPON_DAMAGE = 1;
+    const BASE_SPEED = 2;
+    
     switch(type){
         case 1:
             this.name='sOrb'
-            this.damage= DAMAGE;
-            this.xPos;
-            this.yPos;
-            this.speed;
-            this.movement;
+            this.damage= BASE_WEAPON_DAMAGE;
+            this.xPos = 0;
+            this.yPos = 0;
+            this.speed=BASE_SPEED;
+            this.movement = WeaponMovement.Orbit;
             break;
     }
 }
 
 function drawWeapon(weapon,main){
     drawShape(weapon,main);
-    drawPosition(weapon,main);
 }
 
 function drawShape(weapon,main){
     ctx.beginPath();
-    ctx.arc(main.xPos,main.yPos,5,0, Math.PI*2, false);
+    ctx.arc(main.xPos+weapon.xPos,main.yPos+weapon.yPos,5,0, Math.PI*2, false);
     ctx.fillStyle = "rgba(50, 1, 50, 0.9)";
     ctx.fill();
     ctx.closePath();
 }
 
-function drawPosition(){
+function moveWeapon(weapon,main){
+    switch(weapon.movement){
 
+        case WeaponMovement.Orbit:
+            if(weapon.xPos > MAX_WEAPON_DIST || weapon.xPos < -MAX_WEAPON_DIST){
+                weapon.speed = -weapon.speed
+            }
+            weapon.xPos += weapon.speed;
+            break;
+    }
 }
 
         // ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle)
