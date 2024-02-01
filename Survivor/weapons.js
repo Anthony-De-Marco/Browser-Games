@@ -5,44 +5,84 @@ const WeaponMovement = Object.freeze({
 })
 
 
-function weaponType(type){
+function weaponType(type,main){
     const BASE_WEAPON_DAMAGE = 1;
     const BASE_SPEED = 2;
+    const WEAPON_SIZE = 5;
     
     switch(type){
         case 1:
             this.name='sOrb'
             this.damage= BASE_WEAPON_DAMAGE;
-            this.xPos = 0;
-            this.yPos = 0;
+            this.xPos = main.xPos;
+            this.yPos = main.yPos;
+            this.xDiff=0;
+            this.yDiff=0;
             this.speed=BASE_SPEED;
+            this.size = 5;
             this.movement = WeaponMovement.Orbit;
+            this.hurtBoxRight;
+            this.hurtBoxLeft;
+            this.hurtBoxUp;
+            this.hurtBoxDown;
             break;
     }
 }
 
 function drawWeapon(weapon,main){
+    weapon.xPos = main.xPos + weapon.xDiff;
+    weapon.yPos = main.yPos + weapon.yDiff;
+    weapon.hurtBoxRight = weapon.xPos + weapon.size;
+    weapon.hurtBoxLeft = weapon.xPos - weapon.size;
+    weapon.hurtBoxUp = weapon.yPos - weapon.size;
+    weapon.hurtBoxDown = weapon.yPos + weapon.size;
     drawShape(weapon,main);
+    moveWeapon(weapon,main);
+    // drawHurtBox(weapon);
 }
 
 function drawShape(weapon,main){
     ctx.beginPath();
-    ctx.arc(main.xPos+weapon.xPos,main.yPos+weapon.yPos,5,0, Math.PI*2, false);
+    ctx.arc(weapon.xPos,weapon.yPos,5,0, Math.PI*2, false);
     ctx.fillStyle = "rgba(50, 1, 50, 0.9)";
     ctx.fill();
     ctx.closePath();
+    ctx.beginPath();
 }
 
 function moveWeapon(weapon,main){
     switch(weapon.movement){
 
         case WeaponMovement.Orbit:
-            if(weapon.xPos > MAX_WEAPON_DIST || weapon.xPos < -MAX_WEAPON_DIST){
+            if(weapon.xDiff > MAX_WEAPON_DIST || weapon.xDiff < -MAX_WEAPON_DIST){
                 weapon.speed = -weapon.speed
             }
-            weapon.xPos += weapon.speed;
+            weapon.xDiff += weapon.speed;
             break;
     }
+}
+
+function drawHurtBox(weapon){
+    ctx.beginPath();
+    ctx.arc(weapon.hurtBoxRight,weapon.yPos,1,0, Math.PI*2, false);
+    ctx.fillStyle = "yellow";
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(weapon.hurtBoxLeft,weapon.yPos,1,0, Math.PI*2, false);
+    ctx.fillStyle = "yellow";
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(weapon.xPos,weapon.hurtBoxUp,1,0, Math.PI*2, false);
+    ctx.fillStyle = "yellow";
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(weapon.xPos,weapon.hurtBoxDown,1,0, Math.PI*2, false);
+    ctx.fillStyle = "yellow";
+    ctx.fill();
+    ctx.closePath();
 }
 
         // ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle)

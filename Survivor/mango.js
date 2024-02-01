@@ -17,9 +17,23 @@
             this.moveSpeed = 3;
             this.xPos = canvas.width/2;
             this.yPos = canvas.height/2;
+
+            this.status = 1;
+            this.hitBoxRight;
+            this.hitBoxLeft;
+            this.hitBoxUp;
+            this.hitBoxDown;
+            this.shield;
         }
 
         function drawMain(char){
+            char.hitBoxRight = char.xPos + char.shieldWidth;
+            char.hitBoxLeft = char.xPos - char.shieldWidth;
+            char.hitBoxUp = char.yPos - char.shieldHeight * 1.2;
+            char.hitBoxDown = char.yPos + char.shieldHeight/1.25;
+            char.shield = {cx: char.xPos, cy: char.yPos-char.bodyHeight/3.125, rx: char.shieldWidth, ry: char.shieldHeight}
+            // distance < 1 is everything within the ellipse.
+            // distance > 1 is everything outside the ellipse.
             drawMainBody(char);
             drawMainHead(char);
             drawMainLeaf(char);
@@ -27,6 +41,7 @@
             drawMainHatTop(char);
             drawMainShield(char);
             // drawMangoMid(x,y);
+            // drawMainHitBox(char);
         }
         
         function drawMainBody(char){
@@ -83,13 +98,13 @@
             ctx.closePath();
         }
         
-        // function drawMangoMid(x,y){
-        //     ctx.beginPath();
-        //     ctx.arc(x,y,2,0,Math.PI*2,false);
-        //     ctx.fillStyle = "yellow";
-        //     ctx.fill();
-        //     ctx.closePath();
-        // }
+        function drawMangoMid(x,y){
+            ctx.beginPath();
+            ctx.arc(x,y,2,0,Math.PI*2,false);
+            ctx.fillStyle = "yellow";
+            ctx.fill();
+            ctx.closePath();
+        }
         
         function drawMainShield(char){
             ctx.beginPath();
@@ -129,10 +144,81 @@
             }
         }
 
-        function takeDamageMain(enemy,char){
-            char.shieldHealth.value -= enemy.damage;
+    function mainTakeDamage(enemy,main){
+        //if right side of enemy hits shield
+        if(Math.pow(enemy.hitBoxRight - main.shield.cx, 2) / Math.pow(main.shield.rx, 2) 
+        + Math.pow(enemy.yPos - main.shield.cy,2) / Math.pow(main.shield.ry,2) < 1){
+            main.shieldHealth.value -= enemy.damage;
+            console.log("hit taken");
+        }
+        //if left side of enemy hits
+        if(Math.pow(enemy.hitBoxLeft - main.shield.cx, 2) / Math.pow(main.shield.rx, 2) 
+        + Math.pow(enemy.yPos - main.shield.cy,2) / Math.pow(main.shield.ry,2) < 1){
+            main.shieldHealth.value -= enemy.damage;
+            console.log("hit taken");
+        }
+        //if top  side of enemy hits
+        if(Math.pow(enemy.xPos - main.shield.cx, 2) / Math.pow(main.shield.rx, 2) 
+        + Math.pow(enemy.hitBoxUp - main.shield.cy,2) / Math.pow(main.shield.ry,2) < 1){
+            main.shieldHealth.value -= enemy.damage;
+            console.log("hit taken");
+        }
+        //if bottom side of enemy hits
+        if(Math.pow(enemy.xPos - main.shield.cx, 2) / Math.pow(main.shield.rx, 2) 
+        + Math.pow(enemy.hitBoxDown - main.shield.cy,2) / Math.pow(main.shield.ry,2) < 1){
+                main.shieldHealth.value -= enemy.damage;
+                console.log("hit taken");
+            }
+            //if top right
+            if(Math.pow(enemy.hitBoxRight - main.shield.cx, 2) / Math.pow(main.shield.rx, 2) 
+            + Math.pow(enemy.hitBoxUp - main.shield.cy,2) / Math.pow(main.shield.ry,2) < 1){
+                main.shieldHealth.value -= enemy.damage;
+                console.log("hit taken");
+            }
+            //if bottom right
+            if(Math.pow(enemy.hitBoxRight - main.shield.cx, 2) / Math.pow(main.shield.rx, 2) 
+            + Math.pow(enemy.hitBoxDown - main.shield.cy,2) / Math.pow(main.shield.ry,2) < 1){
+                main.shieldHealth.value -= enemy.damage;
+                console.log("hit taken");
+            }
+            //if top left
+            if(Math.pow(enemy.hitBoxLeft - main.shield.cx, 2) / Math.pow(main.shield.rx, 2) 
+            + Math.pow(enemy.hitBoxUp - main.shield.cy,2) / Math.pow(main.shield.ry,2) < 1){
+                main.shieldHealth.value -= enemy.damage;
+                console.log("hit taken");
+            }
+            //if bottom left
+            if(Math.pow(enemy.hitBoxLeft - main.shield.cx, 2) / Math.pow(main.shield.rx, 2) 
+            + Math.pow(enemy.hitBoxDown - main.shield.cy,2) / Math.pow(main.shield.ry,2) < 1){
+                main.shieldHealth.value -= enemy.damage;
+                console.log("hit taken");
+            }
+            
         }
         
+        
+function drawMainHitBox(main){
+    ctx.beginPath();
+      ctx.arc(main.hitBoxRight,main.yPos,1,0, Math.PI*2, false);
+      ctx.fillStyle = "yellow";
+      ctx.fill();
+      ctx.closePath();
+      ctx.beginPath();
+      ctx.arc(main.hitBoxLeft,main.yPos,1,0, Math.PI*2, false);
+      ctx.fillStyle = "yellow";
+      ctx.fill();
+      ctx.closePath();
+      ctx.beginPath();
+      ctx.arc(main.xPos,main.hitBoxUp,1,0, Math.PI*2, false);
+      ctx.fillStyle = "yellow";
+      ctx.fill();
+      ctx.closePath();
+      ctx.beginPath();
+      ctx.arc(main.xPos,main.hitBoxDown,1,0, Math.PI*2, false);
+      ctx.fillStyle = "yellow";
+      ctx.fill();
+      ctx.closePath();
+  }
         // ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle)
         // /**create circle */
         // ctx.beginPath();

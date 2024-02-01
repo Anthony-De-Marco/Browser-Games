@@ -12,23 +12,30 @@ function main(){
     let orc = new enemyType(2);
     let mango = new mainChar();
     let move = new movement();
-    let sOrb = new weaponType(1);
-
+    let sOrb = new weaponType(1,mango);
+    let time = new metronome();
+    let cTime;
+    let enemy;
+    
     function draw(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+        //between 0 and 100
+        cTime = clock(time);
         drawMain(mango);
         drawWeapon(sOrb,mango);
-        moveWeapon(sOrb,mango);
         moveMain(mango,move);
         hitBorderMain(mango,move);
 
+        if(ghoul.status == 1){
         drawEnemy(ghoul);
-        drawEnemy(orc);
         moveEnemy(ghoul,mango);
+        enemyTakeDamage(sOrb,ghoul);
+        mainTakeDamage(ghoul,mango);
+        }
         
         requestAnimationFrame(draw);
     }
+    
 
     //keyboard event listeners
     document.addEventListener("keydown",keyDownHandler,false);
