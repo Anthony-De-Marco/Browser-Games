@@ -7,9 +7,8 @@ function main(){
 
     /**FOR NOW */
     let ghoul = new enemyType(1);
-    console.log(ghoul);
-
     let orc = new enemyType(2);
+
     let mango = new mainChar();
     let move = new movement();
     let sOrb = new weaponType(1,mango);
@@ -27,18 +26,32 @@ function main(){
         drawWeapon(sOrb,mango);
         moveMain(mango,move);
         hitBorderMain(mango,move);
-        creature = new enemyType(1);
+        creature = new enemyType(getRndInteger(1,2));
         if(cTime == 100){
+            setEnemyPosition(creature,mango);
             enemy.push(creature);
         }
+    
         enemy.forEach((enemy) => {
             if(enemy.status == 1){
                 drawEnemy(enemy);
                 moveEnemy(enemy,mango);
                 enemyTakeDamage(sOrb,enemy);
                 mainTakeDamage(enemy,mango);
+                if(enemy.invuln == true && (cTime == 50 || cTime == 100)){
+                    enemy.invuln = false;
                 }
+            }
         });
+        //     if(orc.status == 1){
+    //     drawEnemy(orc);
+    //     moveEnemy(orc,mango);
+    //     enemyTakeDamage(sOrb,orc);
+    //     mainTakeDamage(orc,mango);
+    //     if(orc.invuln == true && (cTime == 50 || cTime == 100)){
+    //         orc.invuln = false;
+    //     }
+    // }
        
         
         requestAnimationFrame(draw);
@@ -89,4 +102,9 @@ function main(){
         }
     }
     draw();
+
+}
+
+function getRndInteger(min,max){
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
 }

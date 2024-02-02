@@ -47,6 +47,18 @@ function enemyType(num = 1) {
   this.hitBoxDown;
   this.xPos = 100;
   this.yPos = 100;
+  this.invuln = false;
+}
+
+function setEnemyPosition(enemy,main){
+  enemy.xPos = getRndInteger(23,839);
+  enemy.yPos = getRndInteger(39,656);
+  if((enemy.xPos == (main.xPos + 75) && enemy.yPos == (main.yPos + 75) )||
+     (enemy.xPos == (main.xPos - 75) && enemy.yPos == (main.yPos + 75)) ||
+     (enemy.xPos == (main.xPos + 75) && enemy.yPos == (main.yPos - 75)) ||
+     (enemy.xPos == (main.xPos - 75) && enemy.yPos == (main.yPos - 75))){
+      setEnemyPosition(enemy,main);
+     }
 }
 // enemy.type sets everything else
 function drawEnemy(enemy) {
@@ -54,14 +66,12 @@ function drawEnemy(enemy) {
   enemy.hitBoxLeft = enemy.xPos - enemy.bodyWidth - enemy.legWidth;
   enemy.hitBoxUp = enemy.yPos - enemy.bodyHeight - enemy.headSize/2;
   enemy.hitBoxDown = enemy.yPos + enemy.bodyHeight + enemy.legHeight/2;
-  if(enemy.status = 1){
     drawEnemyBody(enemy);
     drawEnemyLegs(enemy);
     drawEnemyArms(enemy);
     drawEnemyHead(enemy);
     // drawEnemyMid(enemy);
     // drawEnemyHitBox(enemy);
-  }
 }
 
 function drawEnemyMid(enemy) {
@@ -207,10 +217,12 @@ function enemyTakeDamage(weapon, enemy) {
       weapon.hurtBoxLeft <= enemy.hitBoxRight &&
       weapon.hurtBoxRight >= enemy.hitBoxLeft &&
       weapon.hurtBoxUp >= enemy.hitBoxUp &&
-      weapon.hurtBoxDown <= enemy.hitBoxDown
+      weapon.hurtBoxDown <= enemy.hitBoxDown &&
+      enemy.invuln == false
       ){
           enemy.hp -= weapon.damage;
           console.log("hit");
+          enemy.invuln = true;
     }
   
     if(enemy.hp <= 0){
@@ -218,7 +230,7 @@ function enemyTakeDamage(weapon, enemy) {
     }
 }
 
-function drawEnemyOutline() {}
+
 /**************
  ENEMY MOVEMENT
  **************/
