@@ -12,6 +12,9 @@ function clock(metronome){
         console.log("tick");
         return metronome.time;
     }
+    if(metronome.time == 50){
+        return metronome.time;
+    }
     if(metronome.time <= 0){
         metronome.speed = -metronome.speed;
         console.log("tock");

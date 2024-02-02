@@ -20,8 +20,9 @@ function main(){
     //create enemy, push into array
     function draw(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        //between 0 and 100
+        //can be 0 or 100
         cTime = clock(time);
+        console.log(cTime);
         drawMain(mango);
         drawWeapon(sOrb,mango);
         moveMain(mango,move);
