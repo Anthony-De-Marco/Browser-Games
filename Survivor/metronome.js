@@ -3,6 +3,12 @@ function metronome(){
     this.speed = 1;
 }
 
+/**
+ * Returns the 0 100 and 50 ticks
+ * 
+ * @param {object} metronome 
+ * @returns 
+ */
 function clock(metronome){
     const MAX = 100;
 

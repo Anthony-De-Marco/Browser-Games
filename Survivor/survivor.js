@@ -20,7 +20,7 @@ function main(){
     //create enemy, push into array
     function draw(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        //can be 0 or 100
+        //can be 0 or 50 or 100
         cTime = clock(time);
         console.log(cTime);
         drawMain(mango);
