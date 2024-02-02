@@ -1,5 +1,5 @@
 window.onload = main();
-
+const MAX_LEVEL = 2;
 function main(){
 
     console.log("hello");
@@ -15,10 +15,14 @@ function main(){
     let time = new metronome();
     let cTime;
     let enemy = [];
+    let level = 1;
 
     //create enemy, push into array
     function draw(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "blue";
+        ctx.fillText(mango.score,10,40);
         //can be 0 or 50 or 100
         cTime = clock(time);
         console.log(cTime);
@@ -26,8 +30,12 @@ function main(){
         drawWeapon(sOrb,mango);
         moveMain(mango,move);
         hitBorderMain(mango,move);
-        creature = new enemyType(getRndInteger(1,2));
-        if(cTime == 100){
+        creature = new enemyType(getRndInteger(1,level));
+        if(mango.score != 0 && mango.score%10 == 0 && level != MAX_LEVEL){
+            level++;
+        }
+        //enemy spawn
+        if(cTime == 100 || cTime == 0){
             setEnemyPosition(creature,mango);
             enemy.push(creature);
         }
@@ -36,7 +44,7 @@ function main(){
             if(enemy.status == 1){
                 drawEnemy(enemy);
                 moveEnemy(enemy,mango);
-                enemyTakeDamage(sOrb,enemy);
+                enemyTakeDamage(sOrb,enemy,mango);
                 mainTakeDamage(enemy,mango);
                 if(enemy.invuln == true && (cTime == 50 || cTime == 100)){
                     enemy.invuln = false;
@@ -104,7 +112,12 @@ function main(){
     draw();
 
 }
-
+/**
+ * gets Random integer between min and max included
+ * @param {*} min 
+ * @param {*} max 
+ * @returns 
+ */
 function getRndInteger(min,max){
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }

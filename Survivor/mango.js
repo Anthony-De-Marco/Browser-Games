@@ -24,6 +24,7 @@
             this.hitBoxUp;
             this.hitBoxDown;
             this.shield;
+            this.score = 0;
         }
 
         function drawMain(char){

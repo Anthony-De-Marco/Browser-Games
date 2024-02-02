@@ -10,6 +10,9 @@ function enemyType(num = 1) {
   const BASE_ENEMY_DAMAGE = 0.01;
   const MOVE_SPEED = 1;
   const BASE_ENEMY_HP = 1;
+
+  const BASE_POINTS = 1;
+
   const TYPE_MULTIPLIER = 1.3;
 
   switch (num) {
@@ -25,6 +28,7 @@ function enemyType(num = 1) {
       this.damage = BASE_ENEMY_DAMAGE;
       this.moveSpeed = MOVE_SPEED;
       this.hp = BASE_ENEMY_HP;
+      this.points = num;
       break;
     case 2:
       this.bodyWidth = BASE_BODY_WIDTH * TYPE_MULTIPLIER;
@@ -38,6 +42,7 @@ function enemyType(num = 1) {
       this.damage = BASE_ENEMY_DAMAGE * TYPE_MULTIPLIER;
       this.moveSpeed = MOVE_SPEED * TYPE_MULTIPLIER;
       this.hp = BASE_ENEMY_HP * TYPE_MULTIPLIER;
+      this.points = num;
       break;
   }
   this.status = 1;
@@ -203,7 +208,7 @@ function drawEnemyHitBox(enemy){
     ctx.closePath();
 }
 
-function enemyTakeDamage(weapon, enemy) {
+function enemyTakeDamage(weapon, enemy, main) {
 
   // console.log(weapon.hurtBoxLeft);
   // console.log(weapon.hurtBoxRight);
@@ -227,6 +232,7 @@ function enemyTakeDamage(weapon, enemy) {
   
     if(enemy.hp <= 0){
       enemy.status = 0;
+      main.score += enemy.points;
     }
 }
 
