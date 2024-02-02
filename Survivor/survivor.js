@@ -15,8 +15,9 @@ function main(){
     let sOrb = new weaponType(1,mango);
     let time = new metronome();
     let cTime;
-    let enemy;
-    
+    let enemy = [];
+
+    //create enemy, push into array
     function draw(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         //between 0 and 100
@@ -25,17 +26,22 @@ function main(){
         drawWeapon(sOrb,mango);
         moveMain(mango,move);
         hitBorderMain(mango,move);
-
-        if(ghoul.status == 1){
-        drawEnemy(ghoul);
-        moveEnemy(ghoul,mango);
-        enemyTakeDamage(sOrb,ghoul);
-        mainTakeDamage(ghoul,mango);
+        creature = new enemyType(1);
+        if(cTime == 100){
+            enemy.push(creature);
         }
+        enemy.forEach((enemy) => {
+            if(enemy.status == 1){
+                drawEnemy(enemy);
+                moveEnemy(enemy,mango);
+                enemyTakeDamage(sOrb,enemy);
+                mainTakeDamage(enemy,mango);
+                }
+        });
+       
         
         requestAnimationFrame(draw);
     }
-    
 
     //keyboard event listeners
     document.addEventListener("keydown",keyDownHandler,false);
