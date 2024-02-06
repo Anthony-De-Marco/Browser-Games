@@ -3,6 +3,9 @@
 
 -change object switch cases to dictionary
 
+-change weapon to array (to be able to add later)
+    -probably change object to dictionary too
+
 -add creatures
 
 -add level up menu
