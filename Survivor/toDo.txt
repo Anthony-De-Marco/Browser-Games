@@ -1,4 +1,5 @@
 -read about model view controller
+    -read about imports in JS
 
 -change object switch cases to dictionary
 
