@@ -1,0 +1,7 @@
+-read about model view controller
+
+-change object switch cases to dictionary
+
+-add creatures
+
+-add level up menu
