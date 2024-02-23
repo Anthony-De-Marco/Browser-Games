@@ -1,0 +1,37 @@
+--- ECS ---
+abstract class Entity{
+	
+	Component list acting on it rn
+	Data common to every entity (id?...)
+}
+abstract class Component{
+	String name;
+	int id;
+}
+class System{
+	called by components to change certain things (ex adding gravity to z momentum)
+}
+
+class Game{
+	loop that creates entities and draws them
+	adds components to entities based on key presses
+	
+}
+
+/*******
+IN UNITY
+*******/
+Entities maintained in EntityManager 
+	Entities have array of Components
+	Entity archetype creates entity with certain combination of components
+
+	Components are data on entites
+
+	Systems are logic that change the components
+
+
+EntityArchetypes -> arrayList we can add to with Entity objects
+
+in general : Entity relies on Component relies on System
+
+ECS takes place in model of MVC
