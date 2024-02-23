@@ -1,22 +1,5 @@
 --- ECS ---
-abstract class Entity{
-	
-	Component list acting on it rn
-	Data common to every entity (id?...)
-}
-abstract class Component{
-	String name;
-	int id;
-}
-class System{
-	called by components to change certain things (ex adding gravity to z momentum)
-}
 
-class Game{
-	loop that creates entities and draws them
-	adds components to entities based on key presses
-	
-}
 
 /*******
 IN UNITY
@@ -35,3 +18,14 @@ EntityArchetypes -> arrayList we can add to with Entity objects
 in general : Entity relies on Component relies on System
 
 ECS takes place in model of MVC
+
+ECS as a relationnal database?
+	Entities are primary keys -> Components are the tables -> Systems are the queries
+
+Component - Property with object data
+Entity - Container for properties
+System - Data processing logic
+EntityManager - Entity database
+SystemManager - Container for systems
+
+ECS uses composition over inheritance
