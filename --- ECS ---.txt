@@ -28,4 +28,6 @@ System - Data processing logic
 EntityManager - Entity database
 SystemManager - Container for systems
 
+use singleton in entity components	(only 1 component of certain type in entity)
+
 ECS uses composition over inheritance
